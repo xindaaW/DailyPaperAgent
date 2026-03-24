@@ -1,4 +1,19 @@
 DOMAIN_PRESETS: dict[str, dict[str, list[str]]] = {
+    "writing_reward_alignment": {
+        "categories": ["cs.CL", "cs.AI", "cs.LG"],
+        "include_terms": [
+            "reward model",
+            "process reward model",
+            "outcome reward model",
+            "open-ended generation",
+            "writing",
+            "rubric",
+            "preference optimization",
+            "preference alignment",
+            "long-form generation",
+            "writing evaluation",
+        ],
+    },
     "human_preference_post_training": {
         "categories": ["cs.CL", "cs.AI", "cs.LG"],
         "include_terms": [
