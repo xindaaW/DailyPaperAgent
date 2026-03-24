@@ -52,17 +52,8 @@ DEFAULTS = {
     },
     "topics": {
         "categories": ["cs.CL", "cs.AI", "cs.LG"],
-        "include_terms": [
-            "reward model",
-            "process reward model",
-            "outcome reward model",
-            "open-ended generation",
-            "writing",
-            "rubric",
-            "preference optimization",
-            "human preference alignment",
-        ],
-        "exclude_terms": ["survey"],
+        "include_terms": ["large language model", "LLM", "reasoning", "agent"],
+        "exclude_terms": [],
     },
     "arxiv": {
         "max_results": 320,

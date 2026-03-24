@@ -92,6 +92,8 @@ You can use this project for many different research domains by changing only th
 
 The code is meant to support focused paper tracking rather than one specific research topic.
 
+If you want a more opinionated setup for a specific area, add a domain preset or override the topic terms in your local `config.yaml`.
+
 ## Outputs
 
 - Markdown reports in `reports/`

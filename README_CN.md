@@ -77,10 +77,11 @@ export MAIL_FROM_ADDR="发件邮箱地址"
 
 也就是说，它更像一个“可配置的研究主题雷达”，而不是只服务某一个课题。
 
+如果你想针对某个方向做更强的定制，可以在本地 `config.yaml` 中改 topic，或者增加自己的 domain preset。
+
 ## 输出结果
 
 - Markdown 日报：`reports/`
 - PDF 日报：`reports/`
 - 状态记忆：`data/state.json`
 - 运行日志：`runtime_logs/`
-
