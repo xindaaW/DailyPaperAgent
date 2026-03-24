@@ -49,8 +49,8 @@ def _paper_from_record(rec: dict[str, Any]) -> Paper | None:
 
 def run_once(cfg: Config, dry_run: bool = False) -> Path:
     print("[TRACK] cycle | running | cycle started")
-    reports_dir = Path(cfg.storage.get("reports_dir", "./DailyPaperAgent/reports"))
-    state_file = Path(cfg.storage.get("state_file", "./DailyPaperAgent/data/state.json"))
+    reports_dir = Path(cfg.storage.get("reports_dir", "reports"))
+    state_file = Path(cfg.storage.get("state_file", "data/state.json"))
 
     state = load_state(state_file)
     print("[TRACK] state | running | loaded state")

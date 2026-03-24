@@ -8,7 +8,7 @@ from .runner import run_scheduler
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="DailyPaperAgent - standalone daily paper tracker")
-    p.add_argument("--config", type=str, default="DailyPaperAgent/config.yaml")
+    p.add_argument("--config", type=str, default="config.yaml")
     p.add_argument("--once", action="store_true")
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--domain", type=str, default="")

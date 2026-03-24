@@ -7,7 +7,7 @@ from typing import Any
 
 
 class AgentLogger:
-    def __init__(self, log_dir: str = "./DailyPaperAgent/runtime_logs"):
+    def __init__(self, log_dir: str = "runtime_logs"):
         self.log_dir = Path(log_dir)
         self.log_dir.mkdir(parents=True, exist_ok=True)
         self.log_file: Path | None = None

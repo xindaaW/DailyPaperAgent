@@ -45,12 +45,12 @@ report:
   enable_skill_context: true
   max_context_papers: 80
   context_char_limit: 180000
-  skills_dir: "DailyPaperAgent/skills"
+  skills_dir: "skills"
 
 storage:
-  reports_dir: "./DailyPaperAgent/reports"
-  state_file: "./DailyPaperAgent/data/state.json"
-  runtime_logs_dir: "./DailyPaperAgent/runtime_logs"
+  reports_dir: "reports"
+  state_file: "data/state.json"
+  runtime_logs_dir: "runtime_logs"
 
 mail:
   enabled: false

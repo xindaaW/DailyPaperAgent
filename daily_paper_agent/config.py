@@ -89,23 +89,23 @@ DEFAULTS = {
         "enable_skill_context": True,
         "max_context_papers": 80,
         "context_char_limit": 180000,
-        "skills_dir": "DailyPaperAgent/skills",
+        "skills_dir": "skills",
         "skill_files": [
-            "DailyPaperAgent/skills/orchestrator/SKILL.md",
-            "DailyPaperAgent/skills/subagents/paper_scout/SKILL.md",
-            "DailyPaperAgent/skills/subagents/baseline_comparator/SKILL.md",
-            "DailyPaperAgent/skills/subagents/insight_synthesizer/SKILL.md",
-            "DailyPaperAgent/skills/subagents/idea_generator/SKILL.md",
-            "DailyPaperAgent/skills/subagents/reviewer/SKILL.md",
-            "DailyPaperAgent/skills/subagents/reviser/SKILL.md",
-            "DailyPaperAgent/skills/subagents/final_editor/SKILL.md",
-            "DailyPaperAgent/skills/pdf_designer/SKILL.md",
+            "skills/orchestrator/SKILL.md",
+            "skills/subagents/paper_scout/SKILL.md",
+            "skills/subagents/baseline_comparator/SKILL.md",
+            "skills/subagents/insight_synthesizer/SKILL.md",
+            "skills/subagents/idea_generator/SKILL.md",
+            "skills/subagents/reviewer/SKILL.md",
+            "skills/subagents/reviser/SKILL.md",
+            "skills/subagents/final_editor/SKILL.md",
+            "skills/pdf_designer/SKILL.md",
         ],
     },
     "storage": {
-        "reports_dir": "./DailyPaperAgent/reports",
-        "state_file": "./DailyPaperAgent/data/state.json",
-        "runtime_logs_dir": "./DailyPaperAgent/runtime_logs",
+        "reports_dir": "reports",
+        "state_file": "data/state.json",
+        "runtime_logs_dir": "runtime_logs",
     },
     "mail": {
         "enabled": False,
@@ -151,8 +151,36 @@ def load_config(path: str) -> Config:
     if not p.exists():
         raise FileNotFoundError(f"config not found: {p}")
     raw = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
-    merged = _resolve_env_refs(_deep_merge(DEFAULTS, raw))
+    merged = _resolve_paths(_resolve_env_refs(_deep_merge(DEFAULTS, raw)), base_dir=p.resolve().parent)
     return Config(raw=merged)
+
+
+def _resolve_paths(raw: dict[str, Any], base_dir: Path) -> dict[str, Any]:
+    out = dict(raw)
+
+    report = dict(out.get("report", {}))
+    storage = dict(out.get("storage", {}))
+
+    def _resolve_path(value: Any) -> Any:
+        if not isinstance(value, str) or not value.strip():
+            return value
+        p = Path(value)
+        if p.is_absolute():
+            return str(p)
+        return str((base_dir / p).resolve())
+
+    report["skills_dir"] = _resolve_path(report.get("skills_dir"))
+    skill_files = report.get("skill_files", [])
+    if isinstance(skill_files, list):
+        report["skill_files"] = [_resolve_path(x) for x in skill_files]
+
+    storage["reports_dir"] = _resolve_path(storage.get("reports_dir"))
+    storage["state_file"] = _resolve_path(storage.get("state_file"))
+    storage["runtime_logs_dir"] = _resolve_path(storage.get("runtime_logs_dir"))
+
+    out["report"] = report
+    out["storage"] = storage
+    return out
 
 
 def _split_csv(raw: str) -> list[str]:

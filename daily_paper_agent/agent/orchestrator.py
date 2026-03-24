@@ -39,11 +39,11 @@ class AutonomousResearchAgent:
         self._log_file: Path | None = None
         self._context_papers_for_subagent: list[dict[str, Any]] = []
         self._tool_history_for_subagent: list[dict[str, Any]] = []
-        self.logger = AgentLogger(log_dir=str(self.cfg.get("storage", {}).get("runtime_logs_dir", "./DailyPaperAgent/runtime_logs")))
+        self.logger = AgentLogger(log_dir=str(self.cfg.get("storage", {}).get("runtime_logs_dir", "runtime_logs")))
         self.context_char_limit = int(cfg.get("report", {}).get("context_char_limit", 120000))
         self.api_total_tokens = 0
         self.enable_tool_review_gate = bool(report_cfg.get("enable_tool_review_gate", True))
-        self.skill_loader = SkillLoader(str(report_cfg.get("skills_dir", "DailyPaperAgent/skills")))
+        self.skill_loader = SkillLoader(str(report_cfg.get("skills_dir", "skills")))
         self.skill_loader.discover_skills()
         self.skill_metadata = self.skill_loader.metadata_prompt()
         self.tool_registry = self._build_tool_registry()

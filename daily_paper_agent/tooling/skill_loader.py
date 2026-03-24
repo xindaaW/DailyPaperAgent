@@ -23,7 +23,7 @@ class Skill:
 
 
 class SkillLoader:
-    def __init__(self, skills_dir: str = "DailyPaperAgent/skills"):
+    def __init__(self, skills_dir: str = "skills"):
         self.skills_dir = Path(skills_dir)
         self._skills: dict[str, Skill] = {}
 
@@ -100,4 +100,3 @@ class SkillLoader:
             s = self._skills[name]
             lines.append(f"- `{s.name}`: {s.description}")
         return "\n".join(lines)
-
