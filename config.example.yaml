@@ -1,0 +1,68 @@
+llm:
+  api_key: "${MINIMAX_API_KEY}"
+  api_base: "https://api.minimax.chat/v1"
+  model: "MiniMax-M1"
+
+topics:
+  categories:
+    - "cs.CL"
+    - "cs.AI"
+    - "cs.LG"
+  include_terms:
+    - "reward model"
+    - "process reward model"
+    - "outcome reward model"
+    - "open-ended generation"
+    - "writing"
+    - "rubric"
+    - "preference optimization"
+    - "human preference alignment"
+  exclude_terms:
+    - "survey"
+
+arxiv:
+  max_results: 320
+  lookback_hours: 168
+  sort_by: "submittedDate"
+  sort_order: "descending"
+  include_updated_window: true
+  fallback_to_category_on_empty: true
+  fallback_expand_lookback: true
+
+scheduler:
+  interval_hours: 8
+  max_papers_per_run: 24
+  min_papers_for_analysis: 18
+  exploration_pool_size: 64
+  target_analysis_pool_size: 48
+  related_memory_limit: 20
+
+report:
+  max_agent_steps: 20
+  max_editorial_rounds: 5
+  analysis_rounds: 3
+  review_rounds: 2
+  enable_skill_context: true
+  max_context_papers: 80
+  context_char_limit: 180000
+  skills_dir: "DailyPaperAgent/skills"
+
+storage:
+  reports_dir: "./DailyPaperAgent/reports"
+  state_file: "./DailyPaperAgent/data/state.json"
+  runtime_logs_dir: "./DailyPaperAgent/runtime_logs"
+
+mail:
+  enabled: false
+  smtp_host: "smtp.126.com"
+  smtp_port: 465
+  use_ssl: true
+  use_tls: false
+  username: "${MAIL_USERNAME}"
+  password: "${MAIL_PASSWORD}"
+  from_addr: "${MAIL_FROM_ADDR}"
+  to_addrs:
+    - "wangxindaw@126.com"
+  subject_prefix: "[DailyPaperAgent]"
+  attach_pdf: true
+  intro_message: "今天你读论文了嘛？"

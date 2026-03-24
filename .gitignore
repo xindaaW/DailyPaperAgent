@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.venv/
+venv/
+
+reports/*.md
+reports/*.pdf
+runtime_logs/*.log
+
+data/state.json
+config.yaml
